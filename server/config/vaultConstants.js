@@ -1,0 +1,33 @@
+/**
+ * Core constants for SecOps-Vault Enterprise Secret Management
+ */
+const SECRET_TYPES = {
+  KV_STATIC: 'KV_STATIC',
+  DYNAMIC_DATABASE: 'DYNAMIC_DATABASE',
+  PKI_CERT: 'PKI_CERT',
+  API_KEY: 'API_KEY'
+};
+
+const LEASE_STATUS = {
+  ACTIVE: 'ACTIVE',
+  EXPIRED: 'EXPIRED',
+  REVOKED: 'REVOKED'
+};
+
+const VAULT_ROLES = {
+  VAULT_ADMIN: 'VAULT_ADMIN',
+  SECURITY_AUDITOR: 'SECURITY_AUDITOR',
+  SERVICE_ACCOUNT: 'SERVICE_ACCOUNT',
+  DEVELOPER: 'DEVELOPER'
+};
+
+module.exports = {
+  SECRET_TYPES,
+  LEASE_STATUS,
+  VAULT_ROLES,
+  ENCRYPTION_ALGORITHM: 'aes-256-gcm',
+  DEFAULT_LEASE_TTL_SECONDS: 3600, // 1 hour
+  MAX_LEASE_TTL_SECONDS: 86400,     // 24 hours
+  IV_LENGTH_BYTES: 12,              // 96 bits for GCM
+  AUTH_TAG_LENGTH_BYTES: 16         // 128 bits
+};
