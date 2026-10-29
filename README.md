@@ -10,38 +10,7 @@
 
 SecOps-Vault is a zero-trust secret management and cryptographic orchestration platform designed to secure sensitive credentials across multi-cloud environments. It features hardware-grade envelope encryption (AES-256-GCM), short-lived dynamic database credential leases with automated revocation, an internal X.509 PKI certificate authority, and tamper-evident audit logging.
 
----
 
-## 🏛️ System Architecture
-
-```mermaid
-flowchart TD
-    Client[("Microservice / Developer / CI Worker")] --> Gateway["SecOps-Vault API Gateway"]
-    
-    subgraph AccessShield["Zero-Trust Policy & RBAC"]
-        Gateway --> TokenValidator["Bearer Token & API Key Validator"]
-        TokenValidator --> RBAC["Path-Based RBAC Policy Engine"]
-    end
-    
-    subgraph CryptoCore["Envelope Encryption Engine"]
-        RBAC --> KEKStore[("Master Key Encryption Key (KEK)")]
-        KEKStore --> DEKGen["Data Encryption Key (DEK) Generator"]
-        DEKGen --> AESGCM["AES-256-GCM Cipher (IV + AuthTag)"]
-    end
-    
-    subgraph DynamicTier["Dynamic Leasing & PKI Engine"]
-        RBAC --> DynamicManager["Dynamic Credential Generator (DB / IAM)"]
-        DynamicManager --> LeaseDaemon["Lease TTL Revocation Daemon"]
-        RBAC --> PKICA["Internal PKI X.509 Certificate Authority"]
-    end
-    
-    subgraph AuditPlane["Storage & Compliance"]
-        AESGCM --> EncryptedDB[("MongoDB: Encrypted Ciphertext Store")]
-        Gateway --> AuditLogger["HMAC-SHA256 Signed Audit Ledger"]
-    end
-```
-
----
 
 ## 🚀 Key Architectural Capabilities
 
